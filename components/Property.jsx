@@ -8,14 +8,14 @@ import millify from 'millify';
 import defaultImage from '../assets/house.jpg';
 
 const Property = ({ property: {coverPhoto, price, rentFrequency, rooms, title, baths, area, agency, isVerified, externalID} }) => {
-console.log("🚀 ~ file: Property.jsx ~ line 11 ~ Property ~ rentFrequency", rentFrequency)
+// console.log("🚀 ~ file: Property.jsx ~ line 11 ~ Property ~ rentFrequency", rentFrequency)
     return (
         <Link href={`/property/${externalID}`} passHref>
-            <Flex flexWrap="wrap" w="25%" minWidth={300} cursor="pointer" padding="5" pt={0}>
+            <Flex flexWrap="wrap" w="22%" minWidth={300} cursor="pointer" pt={0} rounded="md" boxShadow="lg" color='gray.400'>
                 <Box w="full">
-                    <Image src={coverPhoto ? coverPhoto.url : defaultImage} width="full" alt="house"/>
+                    <Image src={coverPhoto ? coverPhoto.url : defaultImage} width="full" borderTopRadius="md" alt="house"/>
                 </Box>
-                <Box w="full">
+                <Box w="full" padding="5">
                     <Flex pt={2} alignItems="center" justifyContent={"space-between"}>
                         <Flex alignItems={"center"}>
                             <Box pr={3} color="green.400">{isVerified && <GoVerified />}</Box>

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import nProgress from 'nprogress';
 import { Router } from 'next/dist/client/router';
 import Layout from '../components/Layout';
+import "../styles/globals.css"
 
 function MyApp({ Component, pageProps }) {
   return (
