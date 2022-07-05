@@ -8,8 +8,8 @@ import Property from '../components/Property';
 import noResult from '../assets/noresult.svg';
 import { fetchApi, baseUrl } from '../utils/fetchApi';
 
-const Search = ({ properties }) => {
-    // console.log("🚀 ~ file: Search.js ~ line 12 ~ Search ~ properties", properties)
+const Search = ({ properties, pageCount }) => {
+    console.log("🚀 ~ file: Search.js ~ line 12 ~ Search ~ pageCount", pageCount)
     
     const [searchFilters, setSearchFilters] = useState(false);
     const router = useRouter();
@@ -37,7 +37,7 @@ const Search = ({ properties }) => {
                 {properties.map((property) => <Property property={property} key={property.id} />)}
             </Flex>
             {properties.length === 0 && (
-                <Flex justifyContent="center" alignItems="center" flexDirection={"column"} p="50px" >
+                <Flex justifyContent="flex-start" alignItems="center" flexDirection={"column"} p="50px">
                     <Image alt="no result" src={noResult} />
                     <Text fontSize={"2xl"} my="20px" >No Result Found</Text>
                 </Flex>
@@ -71,7 +71,8 @@ export async function getServerSideProps({ query }) {
     return {
       props: {
         properties: data?.hits,
-      },
-    };
+        pageCount: data?.nbPages
+      }
+    }
   }
   

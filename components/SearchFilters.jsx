@@ -40,25 +40,31 @@ const SearchFilters = () => {
 
     return (
         <Flex bg="gray.100" justifyContent={"center"} flexWrap="wrap" gap={"15px"} py="20px" w="full">
-            {filters.map((filter) => (
-                <Flex key={filter.queryName} alignItems="center" justifyContent={"center"} gap="5px" fontSize="sm">
-                    <label htmlFor={`${id}-${filter.queryName}`}>{filter.placeholder}</label>
-                    <Select
-                     boxShadow="md"
-                     bg="white"
-                     name={filter.queryName}
-                     id={`${id}-${filter.queryName}`}
-                     value={filter.default}
-                     onChange={(e) => searchProperties({ [filter.queryName]: e.target.value })}
-                    >
-                        {filter?.items?.map((items) => (
-                            <option value={items.value} key={items.value}>
-                                {items.name}
-                            </option>
-                        ))}
-                    </Select>
-                </Flex>
-            ))}
+            {filters.map((filter) => {
+                if (!(query.purpose === 'for-sale' &&  filter.queryName === 'rentFrequency')) {
+                    return (
+                        <Flex key={filter.queryName} alignItems="center" justifyContent={"center"} gap="5px" fontSize="sm">
+                            <Text grow="3" minWidth="fit-content">{filter.placeholder}</Text>
+                            <Select
+                            flexGrow="1"
+                            fontSize="sm"
+                            boxShadow="md"
+                            bg="white"
+                            name={filter.queryName}
+                            id={`${id}-${filter.queryName}`}
+                            value={filter.default}
+                            onChange={(e) => searchProperties({ [filter.queryName]: e.target.value })}
+                            >
+                                {filter?.items?.map((items) => (
+                                    <option value={items.value} key={items.value}>
+                                        {items.name}
+                                    </option>
+                                ))}
+                            </Select>
+                        </Flex>
+                    )
+                }
+            })}
         </Flex>
     );
 }

@@ -9,7 +9,7 @@ const Layout = ({children}) => {
             <Head>
                 <title>Ovie Reator</title>
             </Head>
-            <Box maxWidth={1440} m="auto">
+            <Box maxWidth={1440} m="auto" minHeight={"100vh"}>
                 <header>
                     <Navbar />
                 </header>
