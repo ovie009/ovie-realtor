@@ -21,8 +21,6 @@ const Banner = ({ purpose, title1, title2, desc1, desc2, buttonText, linkName, i
  
 export default function Home({ propertyForRent, propertyForSale }) {
   
-  console.log("🚀 ~ file: index.js ~ line 24 ~ Home ~ propertyForRent", propertyForRent)
-  
   return (
     <Box>
       <Banner 

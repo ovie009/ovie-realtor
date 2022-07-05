@@ -1,8 +1,6 @@
 import Link from 'next/link';
-import { Image } from '@chakra-ui/react';
-import { Box, Flex, Text, Avatar } from '@chakra-ui/react';
+import { Box, Flex, Text, Avatar, AspectRatio, Image } from '@chakra-ui/react';
 import { FaBed, FaBath, FaBorderAll } from 'react-icons/fa';
-// import { BsGridFill } from 'react-icons/Bs';
 import { GoVerified } from 'react-icons/go';
 import millify from 'millify';
 import defaultImage from '../assets/house.jpg';
@@ -11,15 +9,15 @@ const Property = ({ property: {coverPhoto, price, rentFrequency, rooms, title, b
 // console.log("🚀 ~ file: Property.jsx ~ line 11 ~ Property ~ rentFrequency", rentFrequency)
     return (
         <Link href={`/property/${externalID}`} passHref>
-            <Flex flexWrap="wrap" w="22%" minWidth={300} cursor="pointer" pt={0} rounded="md" boxShadow="lg" color='gray.400'>
-                <Box w="full">
+            <Flex flexWrap="wrap" w="22%" minWidth={320} cursor="pointer" pt={0} rounded="md" boxShadow="lg" color='gray.400'>
+                <AspectRatio w="full" ratio={ 4 / 3 }>
                     <Image src={coverPhoto ? coverPhoto.url : defaultImage} width="full" borderTopRadius="md" alt="house"/>
-                </Box>
+                </AspectRatio>
                 <Box w="full" padding="5">
                     <Flex pt={2} alignItems="center" justifyContent={"space-between"}>
                         <Flex alignItems={"center"}>
                             <Box pr={3} color="green.400">{isVerified && <GoVerified />}</Box>
-                            <Text fontWeight={"bold"} fontSize="lg">AED {millify(price)}{rentFrequency && `/${rentFrequency}`} </Text>
+                            <Text fontWeight={"bold"} color="gray.900" fontSize="lg">AED {millify(price)}{rentFrequency && `/${rentFrequency}`} </Text>
                         </Flex>
                         <Box>
                             <Avatar size={"sm"} src={agency?.logo?.url}></Avatar>
