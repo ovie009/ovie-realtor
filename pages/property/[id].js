@@ -9,7 +9,7 @@ const PropertyDetails = ({ propertyDetails: { price, rentFrequency, rooms, title
     <Box maxWidth={"1440px"} margin="auto" p="4" paddingBottom="100px">
         { photos && <ImageScrollbar data={photos} /> }
         <Box w="full" p="6">
-            <Flex pt={2} alignItems="center">
+            <Flex pt={2} alignItems="center" gap="30px">
                 <Flex alignItems={"center"}>
                     <Box pr={3} color="green.400">{isVerified && <GoVerified />}</Box>
                     <Text fontWeight={"bold"} color="gray.900" fontSize="lg">AED {millify(price)}{rentFrequency && `/${rentFrequency}`} </Text>
@@ -34,30 +34,36 @@ const PropertyDetails = ({ propertyDetails: { price, rentFrequency, rooms, title
                     <Text>Purpose:</Text>
                     <Text fontWeight="bold">{purpose}</Text>
                 </Flex>
-                <Flex minWidth="200px" p="3" borderColor="gray.100" gap="20px">
-                    <Text >Furnishing Status:</Text>
-                    <Text fontWeight="bold">{furnishingStatus}</Text>
-                </Flex>
+                {furnishingStatus && 
+                    <Flex minWidth="200px" p="3" borderColor="gray.100" gap="20px">
+                        <Text >Furnishing Status:</Text>
+                        <Text fontWeight="bold">{furnishingStatus}</Text>
+                    </Flex>
+                }
             </Flex>
             <Box>
-                {amenities.length && <Text fontWeight="bold" fontSize="2xl">Amenities:</Text>}
-                <Flex flexWrap="wrap">
-                    {amenities.map((item) => (
-                        item.amenities.map((amenity) => (
-                            <Text
-                             color="blue.400"
-                             fontSize="l"
-                             p="2"
-                             bg="gray.200"
-                             m="1"
-                             borderRadius="5"
-                             key={amenity.text}
-                            >
-                                {amenity.text}
-                            </Text>
-                        ))
-                    ))}
-                </Flex>
+                {amenities.length > 0 &&
+                    <>
+                        <Text fontWeight="bold" fontSize="2xl">Amenities:</Text>
+                        <Flex flexWrap="wrap">
+                            {amenities.map((item) => (
+                                item.amenities.map((amenity) => (
+                                    <Text
+                                    color="blue.400"
+                                    fontSize="l"
+                                    p="2"
+                                    bg="gray.200"
+                                    m="1"
+                                    borderRadius="5"
+                                    key={amenity.text}
+                                    >
+                                        {amenity.text}
+                                    </Text>
+                                ))
+                            ))}
+                        </Flex>
+                    </> 
+                }
             </Box>
         </Box>
     </Box>
