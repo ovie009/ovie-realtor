@@ -32,7 +32,7 @@ const Search = ({ properties, pageCount }) => {
                 <Icon pl={"2"} w="7" as={BsFilter} />
             </Flex>
             {searchFilters && <SearchFilters />}
-            <Text fontSize={"2xl"} fontWeight="bold" p="4">Properties {router.query.purpose}</Text>
+            <Text fontSize={"xl"} fontWeight="500" w="full" textTransform="uppercase" textAlign="center" my="10px" p="4">Properties {router.query.purpose}</Text>
             <Flex flexFlow="wrap" justifyContent={"center"} gap="20px" >
                 {properties.map((property) => <Property property={property} key={property.id} />)}
             </Flex>

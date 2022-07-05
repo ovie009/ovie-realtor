@@ -10,17 +10,19 @@ const SearchFilters = () => {
     const path = router.pathname;
     const { query } = router;
 
-    const id = useId()
-    const [filters, setFilters] = useState(() => {
+    const id = useId();
+
+    const [filters] = useState(() => {
         let tempFilter = filterData
-        console.log("🚀 ~ file: SearchFilters.jsx ~ line 17 ~ const[filters,setFilters]=useState ~ path", query)
-        if (query.purpose === 'for-sale') {
-            tempFilter[0].default = 'for-sale';
-            console.log("🚀 ~ file: SearchFilters.jsx ~ line 18 ~ const[filters,setFilters]=useState ~ tempFilter[0].default", tempFilter[0].default)
-            return tempFilter;
-        } else{
-            return tempFilter;
-        }
+        tempFilter.forEach(filter => {
+            if (query[filter.queryName]) {
+                filter.default = query[filter.queryName];
+            } else{
+                let findIndex = filterData.find(item => item.queryName === filter.queryName)
+                filter.default = findIndex.default;
+            }
+        });
+        return tempFilter;
     });
     
     const searchProperties = (filterValues) => {
@@ -34,7 +36,6 @@ const SearchFilters = () => {
             }
         })
 
-        console.log("🚀 ~ file: SearchFilters.jsx ~ line 38 ~ searchProperties ~ path", path)
         router.push({pathname: path, query });
     }
 
@@ -52,14 +53,16 @@ const SearchFilters = () => {
                             bg="white"
                             name={filter.queryName}
                             id={`${id}-${filter.queryName}`}
-                            value={filter.default}
+                            defaultValue={filter.default}
                             onChange={(e) => searchProperties({ [filter.queryName]: e.target.value })}
                             >
-                                {filter?.items?.map((items) => (
-                                    <option value={items.value} key={items.value}>
-                                        {items.name}
-                                    </option>
-                                ))}
+                                {filter?.items?.map((items) => {
+                                    return (
+                                        <option value={items.value} key={items.value}>
+                                            {items.name}
+                                        </option>
+                                    )
+                                })}
                             </Select>
                         </Flex>
                     )
