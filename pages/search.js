@@ -15,7 +15,7 @@ const Search = ({ properties, pageCount }) => {
     const router = useRouter();
     
     return (
-        <Box>
+        <Box pb="100px">
             <Flex 
                 cursor={"pointer"}
                 bg="gray.100"
@@ -74,5 +74,5 @@ export async function getServerSideProps({ query }) {
         pageCount: data?.nbPages
       }
     }
-  }
+}
   

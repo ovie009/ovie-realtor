@@ -16,7 +16,13 @@ const Layout = ({children}) => {
                 <main>
                     {children}
                 </main>
-                <footer>
+                <footer style={{
+                    position: 'absolute',
+                    zIndex: "2",
+                    width: "100vw",
+                    left: "0",
+                    bottom: "0"
+                }}>
                     <Footer />
                 </footer>
             </Box>
