@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuList, MenuItem, IconButton, Flex, Box, Spacer, us
 import { FcMenu, FcHome, FcAbout, FcSearch, FcDepartment } from 'react-icons/fc';
 import { FiKey } from 'react-icons/fi';
 
-const Navbar = () => {
+const Navbar = ({closeSearchFilters}) => {
 
     const [isLargerThan1280] = useMediaQuery('(min-width: 1280px)');
 
@@ -25,13 +25,13 @@ const Navbar = () => {
                             <Flex cursor="pointer" alignItems={"center"}>Home</Flex>
                         </Link>
                         <Link href="/search?purpose=for-sale" passHref>
-                            <Flex cursor="pointer" alignItems={"center"}>Buy property</Flex>
+                            <Flex onClick={() => closeSearchFilters()} cursor="pointer" alignItems={"center"}>Buy property</Flex>
                         </Link>
                         <Link href="/search?purpose=for-rent" passHref>
-                            <Flex cursor="pointer" alignItems={"center"}>Rent Property</Flex>
+                            <Flex onClick={() => closeSearchFilters()} cursor="pointer" alignItems={"center"}>Rent Property</Flex>
                         </Link>
                         <Link href="/search" passHref>
-                            <Flex cursor="pointer" gap="10px" alignItems={"center"}> <FcSearch/> Search</Flex>
+                            <Flex onClick={() => closeSearchFilters()} cursor="pointer" gap="10px" alignItems={"center"}> <FcSearch/> Search</Flex>
                         </Link>
                     </Flex> : 
                     <Menu>
@@ -41,13 +41,13 @@ const Navbar = () => {
                                 <MenuItem icon={<FcHome/>}>Home</MenuItem>
                             </Link>
                             <Link href="/search" passHref>
-                                <MenuItem icon={<FcSearch/>}>Search</MenuItem>
+                                <MenuItem onClick={() => closeSearchFilters()} icon={<FcSearch/>}>Search</MenuItem>
                             </Link>
                             <Link href="/search?purpose=for-sale" passHref>
-                                <MenuItem icon={<FcAbout/>}>Buy Property</MenuItem>
+                                <MenuItem onClick={() => closeSearchFilters()} icon={<FcAbout/>}>Buy Property</MenuItem>
                             </Link>
                             <Link href="/search?purpose=for-rent" passHref>
-                                <MenuItem icon={<FiKey/>}>Rent Property</MenuItem>
+                                <MenuItem onClick={() => closeSearchFilters()} icon={<FiKey/>}>Rent Property</MenuItem>
                             </Link>
                         </MenuList>
                     </Menu>

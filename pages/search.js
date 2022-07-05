@@ -7,11 +7,13 @@ import SearchFilters from "../components/SearchFilters";
 import Property from '../components/Property';
 import noResult from '../assets/noresult.svg';
 import { fetchApi, baseUrl } from '../utils/fetchApi';
+import { filterData, getFilterValues } from "../utils/filterData";
 
-const Search = ({ properties, pageCount }) => {
-    console.log("🚀 ~ file: Search.js ~ line 12 ~ Search ~ pageCount", pageCount)
+
+const Search = ({ properties, pageCount, searchFilters, handleSearchFilters }) => {
+    // console.log("🚀 ~ file: Search.js ~ line 14 ~ Search ~ searchFilters", searchFilters)
+    // console.log("🚀 ~ file: Search.js ~ line 12 ~ Search ~ pageCount", pageCount)
     
-    const [searchFilters, setSearchFilters] = useState(false);
     const router = useRouter();
     
     return (
@@ -26,12 +28,12 @@ const Search = ({ properties, pageCount }) => {
                 fontSize="lg"
                 justifyContent={"center"}
                 alignItems="center"
-                onClick={() => setSearchFilters(!searchFilters)}
+                onClick={() => handleSearchFilters()}
             >
                 <Text>Search Property By Filters</Text>
                 <Icon pl={"2"} w="7" as={BsFilter} />
             </Flex>
-            {searchFilters && <SearchFilters />}
+            {searchFilters && <SearchFilters filterData={filterData} getFilterValues={getFilterValues} />}
             <Text fontSize={"xl"} fontWeight="500" w="full" textTransform="uppercase" textAlign="center" my="10px" p="4">Properties {router.query.purpose}</Text>
             <Flex flexFlow="wrap" justifyContent={"center"} gap="20px" >
                 {properties.map((property) => <Property property={property} key={property.id} />)}

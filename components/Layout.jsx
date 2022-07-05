@@ -3,7 +3,8 @@ import { Box } from '@chakra-ui/react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-const Layout = ({children}) => {
+const Layout = ({children, closeSearchFilters}) => {
+
     return (
         <>
             <Head>
@@ -11,7 +12,7 @@ const Layout = ({children}) => {
             </Head>
             <Box maxWidth={1440} m="auto" minHeight={"100vh"}>
                 <header>
-                    <Navbar />
+                    <Navbar closeSearchFilters={closeSearchFilters} />
                 </header>
                 <main>
                     {children}

@@ -2,9 +2,8 @@ import { useEffect, useState, useId } from "react";
 import { Flex, Select, Box, Text, Input, Spinner, Icon, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import MdCancel from 'react-icons/md';
-import { filterData, getFilterValues } from "../utils/filterData";
 
-const SearchFilters = () => {
+const SearchFilters = ({filterData, getFilterValues}) => {
     
     const router = useRouter();
     const path = router.pathname;
