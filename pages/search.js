@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { Flex, Box, Text, Icon } from "@chakra-ui/react";
 import { BsFilter } from 'react-icons/bs';
 import Image from 'next/image';
@@ -8,12 +8,10 @@ import Property from '../components/Property';
 import noResult from '../assets/noresult.svg';
 import { fetchApi, baseUrl } from '../utils/fetchApi';
 import { filterData, getFilterValues } from "../utils/filterData";
+import Pagination from '../components/Pagination'
 
 
-const Search = ({ properties, pageCount, searchFilters, handleSearchFilters }) => {
-    // console.log("🚀 ~ file: Search.js ~ line 14 ~ Search ~ searchFilters", searchFilters)
-    // console.log("🚀 ~ file: Search.js ~ line 12 ~ Search ~ pageCount", pageCount)
-    
+const Search = ({ properties, pageCount, page, searchFilters, handleSearchFilters }) => {
     const router = useRouter();
     
     return (
@@ -44,6 +42,7 @@ const Search = ({ properties, pageCount, searchFilters, handleSearchFilters }) =
                     <Text fontSize={"2xl"} my="20px" >No Result Found</Text>
                 </Flex>
             )}
+            {/* {pageCount > 1 && <Pagination pageCount={pageCount} page={page} />} */}
         </Box>
     );
 }
@@ -69,11 +68,14 @@ export async function getServerSideProps({ query }) {
     const categoryExternalID = query.categoryExternalID || '4';
   
     const data = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&bathsMax=${bathsMax}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&roomsMax=${roomsMax}&sort=${sort}&areaMax=${areaMax}&page=${page}&hitsPerPage=${hitsPerPage}&furnishingStatus=${furnishingStatus}`);
+
+    // console.log(data);
   
     return {
       props: {
         properties: data?.hits,
-        pageCount: data?.nbPages
+        pageCount: data?.nbPages,
+        page: data?.page
       }
     }
 }
